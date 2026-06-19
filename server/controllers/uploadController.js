@@ -1,8 +1,4 @@
 
-const scanDependencies =
-require("../analyzers/dependencyAnalyzer");
-const buildKnowledgeGraph =
-require("../analyzers/knowledgeGraphBuilder");
 const generateDocumentation =require("../analyzers/documentationGenerator");
 const databaseAnalyzer = require("../analyzers/databaseAnalyzer");
 const extractRoutes = require("../analyzers/routeExtractor");
@@ -48,28 +44,17 @@ generateDocumentation(
   routes,
   databaseInfo
 );
-// Dependency Graph
-const dependencyGraph =
-scanDependencies(extractedPath);
-
-// Knowledge Graph
-const knowledgeGraph =
-buildKnowledgeGraph(dependencyGraph);
+    // Step 3: Send Response
 return res.json({
   success: true,
-
   uploadedFile: req.file.filename,
   extractedPath,
-
   analysis,
   scanResult,
   summary,
   routes,
   databaseInfo,
-  documentation,
-
-  dependencyGraph,
-  knowledgeGraph
+  documentation
 });
 
   } catch (error) {
